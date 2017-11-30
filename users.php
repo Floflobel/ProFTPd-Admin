@@ -134,8 +134,6 @@ include ("includes/header.php");
               <thead>
                 <th>UID</th>
                 <th><span class="glyphicon glyphicon-user" aria-hidden="true" title="User name"></th>
-                <th><span class="glyphicon glyphicon-tag" aria-hidden="true" title="Main group"></th>
-                <th class="hidden-xs hidden-sm" data-defaultsort="disabled"><span class="glyphicon glyphicon-tags" aria-hidden="true" title="Additional groups"></th>
                 <th class="hidden-xs hidden-sm hidden-md"><span class="glyphicon glyphicon-time" aria-hidden="true" title="Last login"></th>
                 <th class="hidden-xs hidden-sm"><span class="glyphicon glyphicon-list-alt" aria-hidden="true" title="Login count"></th>
                 <th class="hidden-xs"><span class="glyphicon glyphicon-signal" aria-hidden="true" title="Uploaded MBs"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true" title="Uploaded MBs"></th>
@@ -152,21 +150,6 @@ include ("includes/header.php");
                   <tr>
                     <td class="pull-middle"><?php echo $user[$field_uid]; ?></td>
                     <td class="pull-middle"><a href="edit_user.php?action=show&<?php echo $field_id; ?>=<?php echo $user[$field_id]; ?>"><?php echo $user[$field_userid]; ?></a></td>
-                    <td class="pull-middle"><?php echo $all_groups[$user[$field_ugid]]; ?></td>
-                    <td class="pull-middle hidden-xs hidden-sm">
-                      <?php if (empty($groups[$user[$field_userid]])) { ?>
-                        none
-                      <?php } else { ?>
-                        <div class="dropdown">
-                          <button type="button" class="btn btn-default btn-xs dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown"><?php echo count($groups[$user[$field_userid]]); ?> groups <span class="caret"></span></button>
-                          <ul class="dropdown-menu" role="menu">
-                            <?php foreach ($groups[$user[$field_userid]] as $g_group) { ?>
-                              <li role="presentation"><a role="menuitem"><?php echo $g_group; ?></a></li>
-                            <?php } ?>
-                          </ul>
-                        </div>
-                      <?php } ?>
-                    </td>
                     <td class="pull-middle hidden-xs hidden-sm hidden-md"><?php echo $user[$field_last_login]; ?></td>
                     <td class="pull-middle hidden-xs hidden-sm"><?php echo $user[$field_login_count]; ?></td>
                     <td class="pull-middle hidden-xs"><?php echo sprintf("%2.1f", $user[$field_bytes_in_used] / 1048576); ?></td>
