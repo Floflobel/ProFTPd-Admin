@@ -101,10 +101,10 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     if ($ac->add_user($userdata)) {
       if (isset($_REQUEST[$field_ad_gid])) {
         while (list($g_key, $g_gid) = each($_REQUEST[$field_ad_gid])) {
-          if (!$ac->is_valid_id($g_gid)) {
-            $warnmsg = 'Adding additional group failed; at least one of the additional groups had an invalid GID.';
-            continue;
-          }
+          //if (!$ac->is_valid_id($g_gid)) {
+          //  $warnmsg = 'Adding additional group failed; at least one of the additional groups had an invalid GID.';
+          //  continue;
+          //}
           // XXX: fix error handling here
           $ac->add_user_to_group($_REQUEST[$field_userid], $g_gid);
         }
