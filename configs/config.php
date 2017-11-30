@@ -41,6 +41,7 @@ $cfg['field_groupname'] = "groupname";
 $cfg['field_gid'] = "gid";
 $cfg['field_members'] = "members";
 
+$cfg['default_passwd_length'] = "16";
 $cfg['default_uid'] = "30000"; //if empty next incremental will be default
 $cfg['default_gid'] = "30000"; //if empty next incremental will be default
 $cfg['default_homedir'] = "/srv/ftp/";

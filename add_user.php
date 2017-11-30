@@ -151,7 +151,7 @@ if (isset($errormsg)) {
     $ad_gid = $_REQUEST[$field_ad_gid];
     $shell  = $cfg['default_shell'];
   }
-  $passwd   = $ac->generate_random_string((int) $cfg['min_passwd_length']);
+  $passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);
   $homedir  = $cfg['default_homedir'];
   $title    = "m";
   $name     = "";
