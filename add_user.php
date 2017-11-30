@@ -72,7 +72,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid home directory; home directory cannot be empty.');
   }
   /* shell validation */
-  if (strlen($_REQUEST[$field_shell]) <= 1) {
+  if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
   }
   /* user name uniqueness validation */
@@ -91,7 +91,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_ugid     => $cfg['default_gid'],
                       $field_passwd   => $_REQUEST[$field_passwd],
                       $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
-                      $field_shell    => $_REQUEST[$field_shell],
+                      $field_shell    => $cfg['default_shell'],
                       $field_title    => $_REQUEST[$field_title],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
@@ -127,7 +127,7 @@ if (isset($errormsg)) {
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
   $homedir  = $cfg['default_homedir'] + $_REQUEST[$field_homedir];
-  $shell    = $_REQUEST[$field_shell];
+  $shell    = $cfg['default_shell'];
   $title    = $_REQUEST[$field_title];
   $name     = $_REQUEST[$field_name];
   $email    = $_REQUEST[$field_email];
@@ -149,7 +149,7 @@ if (isset($errormsg)) {
   } else {
     $ugid    = $cfg['default_gid'];
     $ad_gid = $_REQUEST[$field_ad_gid];
-    $shell  = $_REQUEST[$field_shell];
+    $shell  = $cfg['default_shell'];
   }
   $passwd   = $ac->generate_random_string((int) $cfg['min_passwd_length']);
   $homedir  = $cfg['default_homedir'];
@@ -195,13 +195,6 @@ include ("includes/header.php");
               <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $homedir; ?>)</label>
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="" placeholder="Enter a home folder" />
-              </div>
-            </div>
-            <!-- Shell -->
-            <div class="form-group">
-              <label for="<?php echo $field_shell; ?>" class="col-sm-4 control-label">Shell</label>
-              <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_shell; ?>" name="<?php echo $field_shell; ?>" value="<?php echo $shell; ?>" placeholder="Enter the user's shell" />
               </div>
             </div>
             <!-- Title -->
