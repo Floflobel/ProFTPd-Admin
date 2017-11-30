@@ -192,7 +192,7 @@ include ("includes/header.php");
             </div>
             <!-- Main group -->
             <?php while (list($g_gid, $g_group) = each($groups)) {
-              $_REQUEST[$field_ugid] => $g_gid
+              $_REQUEST[$field_ugid] => $g_gid;
             } ?>
             <!-- Additional groups -->
             <div class="form-group">
