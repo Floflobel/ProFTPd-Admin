@@ -182,15 +182,6 @@ include ("includes/header.php");
                 <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
               </div>
             </div>
-            <!-- UID -->
-            <div class="form-group">
-              <label for="<?php echo $field_uid; ?>" class="col-sm-4 control-label">UID</label>
-              <div class="controls col-sm-8">
-                <input type="number" class="form-control" id="<?php echo $field_uid; ?>" name="<?php echo $field_uid; ?>" value="<?php echo $uid; ?>" min="1" placeholder="Enter a UID" required />
-                <p class="help-block"><small>Positive integer.</small></p>
-              </div>
-            </div>
-            <!-- Main group -->
             <!-- Additional groups -->
             <div class="form-group">
               <label for="<?php echo $field_ad_gid; ?>" class="col-sm-4 control-label">Additional groups</label>
