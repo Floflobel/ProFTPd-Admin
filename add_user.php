@@ -47,16 +47,16 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_userid_length'].' characters.');
   }
   /* uid validation */
-  if (empty($_REQUEST[$field_uid]) || !$ac->is_valid_id($_REQUEST[$field_uid])) {
+  if (empty($cfg['default_uid']) || !$ac->is_valid_id[$cfg['default_uid'])) {
     array_push($errors, 'Invalid UID; must be a positive integer.');
   }
   if ($cfg['max_uid'] != -1 && $cfg['min_uid'] != -1) {
-    if ($_REQUEST[$field_uid] > $cfg['max_uid'] || $_REQUEST[$field_uid] < $cfg['min_uid']) {
+    if ($cfg['default_uid'] > $cfg['max_uid'] || $cfg['default_uid'] < $cfg['min_uid']) {
       array_push($errors, 'Invalid UID; UID must be between ' . $cfg['min_uid'] . ' and ' . $cfg['max_uid'] . '.');
     }
-  } else if ($cfg['max_uid'] != -1 && $_REQUEST[$field_uid] > $cfg['max_uid']) {
+  } else if ($cfg['max_uid'] != -1 && $cfg['default_uid'] > $cfg['max_uid']) {
     array_push($errors, 'Invalid UID; UID must be at most ' . $cfg['max_uid'] . '.');
-  } else if ($cfg['min_uid'] != -1 && $_REQUEST[$field_uid] < $cfg['min_uid']) {
+  } else if ($cfg['min_uid'] != -1 && $cfg['default_uid'] < $cfg['min_uid']) {
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* gid validation */
@@ -122,7 +122,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 if (isset($errormsg)) {
   /* This is a failed attempt */
   $userid   = $_REQUEST[$field_userid];
-  $uid      = $_REQUEST[$field_uid];
+  $uid      = $cfg['default_uid'];
   $ugid     = $cfg['default_gid'];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
@@ -194,7 +194,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $homedir; ?>)</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home directory" />
+                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home folder" />
               </div>
             </div>
             <!-- Shell -->
