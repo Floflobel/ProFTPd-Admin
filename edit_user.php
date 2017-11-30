@@ -128,7 +128,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
                       $field_uid      => $_REQUEST[$field_uid],
                       $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $_REQUEST[$field_homedir],
+                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
                       $field_shell    => $_REQUEST[$field_shell],
                       $field_title    => $_REQUEST[$field_title],
                       $field_name     => $_REQUEST[$field_name],
@@ -184,7 +184,7 @@ if (empty($errormsg)) {
   $ugid     = $_REQUEST[$field_ugid];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
-  $homedir  = $_REQUEST[$field_homedir];
+  $homedir  = $cfg['default_homedir'] . $_REQUEST[$field_homedir];
   $shell    = $_REQUEST[$field_shell];
   $title    = $_REQUEST[$field_title];
   $name     = $_REQUEST[$field_name];
@@ -283,36 +283,6 @@ include ("includes/header.php");
               <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
             </div>
           </div>
-          <!-- UID -->
-          <div class="form-group">
-            <label for="<?php echo $field_uid; ?>" class="col-sm-4 control-label">UID</label>
-            <div class="controls col-sm-8">
-              <input type="number" class="form-control" id="<?php echo $field_uid; ?>" name="<?php echo $field_uid; ?>" value="<?php echo $uid; ?>" min="1" placeholder="Enter a UID" required />
-              <p class="help-block"><small>Positive integer.</small></p>
-            </div>
-          </div>
-          <!-- Main group -->
-          <div class="form-group">
-            <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
-            <div class="controls col-sm-8">
-              <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
-              <?php reset ($groups); while (list($g_gid, $g_group) = each($groups)) { ?>
-                <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
-              <?php } ?>
-              </select>
-            </div>
-          </div>
-          <!-- Additional groups -->
-          <div class="form-group">
-            <label for="<?php echo $field_ad_gid; ?>" class="col-sm-4 control-label">Additional groups</label>
-            <div class="controls col-sm-8">
-              <select class="form-control multiselect" id="<?php echo $field_ad_gid; ?>" name="<?php echo $field_ad_gid; ?>[]" multiple="multiple">
-              <?php reset ($groups); while (list($g_gid, $g_group) = each($groups)) { ?>
-                <option value="<?php echo $g_gid; ?>" <?php if (array_key_exists($g_gid, $ad_gid)) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
-              <?php } ?>
-              </select>
-            </div>
-          </div>
           <!-- Password -->
           <div class="form-group">
             <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
@@ -326,13 +296,6 @@ include ("includes/header.php");
             <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory</label>
             <div class="controls col-sm-8">
               <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home directory" />
-            </div>
-          </div>
-          <!-- Shell -->
-          <div class="form-group">
-            <label for="<?php echo $field_shell; ?>" class="col-sm-4 control-label">Shell</label>
-            <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_shell; ?>" name="<?php echo $field_shell; ?>" value="<?php echo $shell; ?>" placeholder="Enter the user's shell" />
             </div>
           </div>
           <!-- Title -->
