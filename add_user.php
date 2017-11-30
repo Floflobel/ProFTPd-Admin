@@ -60,7 +60,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* gid validation */
-  if (empty($_REQUEST[$field_ugid]) || !$ac->is_valid_id($_REQUEST[$field_ugid])) {
+  if (empty($cfg['default_gid']) || !$ac->is_valid_id($cfg['default_gid'])) {
     array_push($errors, 'Invalid main group; GID must be a positive integer.');
   }
   /* password length validation */
@@ -80,7 +80,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'User name already exists; name must be unique.');
   }
   /* gid existance validation */
-  if (!$ac->check_gid($_REQUEST[$field_ugid])) {
+  if (!$ac->check_gid($cfg['default_gid'])) {
     array_push($errors, 'Main group does not exist; GID cannot be found in the database.');
   }
   /* data validation passed */
@@ -88,7 +88,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_userid   => $_REQUEST[$field_userid],
                       $field_uid      => $cfg['default_uid'],
-                      $field_ugid     => "30000",
+                      $field_ugid     => $cfg['default_gid'],
                       $field_passwd   => $_REQUEST[$field_passwd],
                       $field_homedir  => $_REQUEST[$field_homedir],
                       $field_shell    => $_REQUEST[$field_shell],
@@ -123,7 +123,7 @@ if (isset($errormsg)) {
   /* This is a failed attempt */
   $userid   = $_REQUEST[$field_userid];
   $uid      = $_REQUEST[$field_uid];
-  $ugid     = $_REQUEST[$field_ugid];
+  $ugid     = $cfg['default_gid'];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
   $homedir  = $_REQUEST[$field_homedir];
@@ -147,7 +147,7 @@ if (isset($errormsg)) {
     $ad_gid = array();
     $shell  = "/bin/false";
   } else {
-    $ugid    = $_REQUEST[$field_ugid];
+    $ugid    = $cfg['default_gid'];
     $ad_gid = $_REQUEST[$field_ad_gid];
     $shell  = $_REQUEST[$field_shell];
   }
