@@ -182,17 +182,6 @@ include ("includes/header.php");
                 <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
               </div>
             </div>
-            <!-- Additional groups -->
-            <div class="form-group">
-              <label for="<?php echo $field_ad_gid; ?>" class="col-sm-4 control-label">Additional groups</label>
-              <div class="controls col-sm-8">
-                <select class="form-control multiselect" id="<?php echo $field_ad_gid; ?>" name="<?php echo $field_ad_gid; ?>[]" multiple="multiple">
-                <?php reset ($groups); while (list($g_gid, $g_group) = each($groups)) { ?>
-                  <option value="<?php echo $g_gid; ?>" <?php if (array_key_exists($g_gid, $ad_gid)) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
-                <?php } ?>
-                </select>
-              </div>
-            </div>
             <!-- Password -->
             <div class="form-group">
               <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
@@ -203,7 +192,7 @@ include ("includes/header.php");
             </div>
             <!-- Home directory -->
             <div class="form-group">
-              <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory</label>
+              <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $homedir; ?>)</label>
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home directory" />
               </div>
