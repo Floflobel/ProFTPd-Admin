@@ -90,7 +90,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_uid      => $cfg['default_uid'],
                       $field_ugid     => $cfg['default_gid'],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $_REQUEST[$field_homedir],
+                      $field_homedir  => $cfg['default_homedir'] + $_REQUEST[$field_homedir],
                       $field_shell    => $_REQUEST[$field_shell],
                       $field_title    => $_REQUEST[$field_title],
                       $field_name     => $_REQUEST[$field_name],
@@ -126,7 +126,7 @@ if (isset($errormsg)) {
   $ugid     = $cfg['default_gid'];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
-  $homedir  = $_REQUEST[$field_homedir];
+  $homedir  = $cfg['default_homedir'] + $_REQUEST[$field_homedir];
   $shell    = $_REQUEST[$field_shell];
   $title    = $_REQUEST[$field_title];
   $name     = $_REQUEST[$field_name];
@@ -194,7 +194,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $homedir; ?>)</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home folder" />
+                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="" placeholder="Enter a home folder" />
               </div>
             </div>
             <!-- Shell -->
