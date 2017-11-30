@@ -88,7 +88,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_userid   => $_REQUEST[$field_userid],
                       $field_uid      => $cfg['default_uid'],
-                      $field_ugid     => $_REQUEST[$field_ugid],
+                      $field_ugid     => $cfg['default_ugid'],
                       $field_passwd   => $_REQUEST[$field_passwd],
                       $field_homedir  => $_REQUEST[$field_homedir],
                       $field_shell    => $_REQUEST[$field_shell],
@@ -191,9 +191,6 @@ include ("includes/header.php");
               </div>
             </div>
             <!-- Main group -->
-            <?php while (list($g_gid, $g_group) = each($groups)) {
-              $_REQUEST[$field_ugid] = $g_gid;
-            } ?>
             <!-- Additional groups -->
             <div class="form-group">
               <label for="<?php echo $field_ad_gid; ?>" class="col-sm-4 control-label">Additional groups</label>
