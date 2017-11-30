@@ -47,7 +47,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_userid_length'].' characters.');
   }
   /* uid validation */
-  if (empty($cfg['default_uid']) || !$ac->is_valid_id[$cfg['default_uid'])) {
+  if (empty($cfg['default_uid']) || !$ac->is_valid_id($cfg['default_uid'])) {
     array_push($errors, 'Invalid UID; must be a positive integer.');
   }
   if ($cfg['max_uid'] != -1 && $cfg['min_uid'] != -1) {
