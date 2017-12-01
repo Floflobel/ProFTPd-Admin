@@ -87,7 +87,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* gid validation */
-  if (empty($_REQUEST[$field_ugid]) || !$ac->is_valid_id($_REQUEST[$field_ugid])) {
+  if (empty($user[$field_ugid]) || !$ac->is_valid_id($user[$field_ugid])) {
     array_push($errors, 'Invalid main group; GID must be a positive integer.');
   }
   /* password length validation */
@@ -99,7 +99,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     array_push($errors, 'Invalid home directory; home directory cannot be empty.');
   }
   /* shell validation */
-  if (strlen($_REQUEST[$field_shell]) <= 1) {
+  if (strlen($user[$field_shell]) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
   }
   /* user name uniqueness validation */
@@ -107,8 +107,8 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     array_push($errors, 'User name already exists; name must be unique.');
   }
   /* gid existance validation */
-  if (!$ac->check_gid($_REQUEST[$field_ugid])) {
-    array_push($errors, 'Main group does not exist; GID '.$_REQUEST[$field_ugid].' cannot be found in the database.');
+  if (!$ac->check_gid($user[$field_ugid])) {
+    array_push($errors, 'Main group does not exist; GID '.$user[$field_ugid].' cannot be found in the database.');
   }
   /* data validation passed */
   if (count($errors) == 0) {
