@@ -21,7 +21,7 @@ include ("includes/header.php");
 ?>
 <?php include ("includes/messages.php"); ?>
 
-<div class="col-xs-12 col-sm-6">
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 center">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Users</h3>
