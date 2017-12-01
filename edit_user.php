@@ -74,16 +74,16 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_userid_length'].' characters.');
   }
   /* uid validation */
-  if (empty($_REQUEST[$field_uid]) || !$ac->is_valid_id($_REQUEST[$field_uid])) {
+  if (empty($user[$field_uid]) || !$ac->is_valid_id($user[$field_uid])) {
     array_push($errors, 'Invalid UID; must be a positive integer.');
   }
   if ($cfg['max_uid'] != -1 && $cfg['min_uid'] != -1) {
-    if ($_REQUEST[$field_uid] > $cfg['max_uid'] || $_REQUEST[$field_uid] < $cfg['min_uid']) {
+    if ($_user[$field_uid] > $cfg['max_uid'] || $user[$field_uid] < $cfg['min_uid']) {
       array_push($errors, 'Invalid UID; UID must be between ' . $cfg['min_uid'] . ' and ' . $cfg['max_uid'] . '.');
     }
-  } else if ($cfg['max_uid'] != -1 && $_REQUEST[$field_uid] > $cfg['max_uid']) {
+  } else if ($cfg['max_uid'] != -1 && $user[$field_uid] > $cfg['max_uid']) {
     array_push($errors, 'Invalid UID; UID must be at most ' . $cfg['max_uid'] . '.');
-  } else if ($cfg['min_uid'] != -1 && $_REQUEST[$field_uid] < $cfg['min_uid']) {
+  } else if ($cfg['min_uid'] != -1 && $user[$field_uid] < $cfg['min_uid']) {
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* gid validation */
