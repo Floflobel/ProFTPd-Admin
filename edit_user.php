@@ -128,7 +128,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
                       $field_uid      => $user[$field_uid],
                       $field_ugid     => $user[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $_REQUEST[$field_homedir],
+                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
                       $field_shell    => $user[$field_shell],
                       $field_title    => $_REQUEST[$field_title],
                       $field_name     => $_REQUEST[$field_name],
