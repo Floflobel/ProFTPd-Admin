@@ -294,7 +294,7 @@ include ("includes/header.php");
           </div>
           <!-- Home directory -->
           <div class="form-group">
-            <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory</label>
+            <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $cfg['default_homedir'] ?>)</label>
             <div class="controls col-sm-8">
               <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home directory" />
             </div>
