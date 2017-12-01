@@ -185,7 +185,7 @@ if (empty($errormsg)) {
   $ugid     = $_REQUEST[$field_ugid];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
-  $homedir  = $cfg['default_homedir'] . $_REQUEST[$field_homedir];
+  $homedir  = $_REQUEST[$field_homedir];
   $shell    = $_REQUEST[$field_shell];
   $title    = $_REQUEST[$field_title];
   $name     = $_REQUEST[$field_name];
