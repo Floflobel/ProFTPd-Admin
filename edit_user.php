@@ -160,6 +160,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     /* update additional groups */
     $ad_gid = $ac->parse_groups($userid);
     $infomsg = 'User "'.$_REQUEST[$field_userid].'" updated successfully.';
+    $infomsg = 'debug: "' . $cfg['default_homedir'] . $_REQUEST[$field_homedir] . '" -- ';
   }
 }
 
@@ -170,7 +171,6 @@ if (empty($errormsg)) {
   $ugid     = $user[$field_ugid];
   $passwd   = '';
   $homedir  = substr($user[$field_homedir], strlen($cfg['default_homedir']));
-  $default_homedir  = 	$cfg['default_homedir'];
   $shell    = $user[$field_shell];
   $title    = $user[$field_title];
   $name     = $user[$field_name];
