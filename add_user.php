@@ -126,7 +126,7 @@ if (isset($errormsg)) {
   $ugid     = $cfg['default_gid'];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
-  $homedir  = $cfg['default_homedir'] + $_REQUEST[$field_homedir];
+  $homedir  = $cfg['default_homedir'] . $_REQUEST[$field_homedir];
   $shell    = $cfg['default_shell'];
   $title    = $_REQUEST[$field_title];
   $name     = $_REQUEST[$field_name];

@@ -78,7 +78,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     array_push($errors, 'Invalid UID; must be a positive integer.');
   }
   if ($cfg['max_uid'] != -1 && $cfg['min_uid'] != -1) {
-    if ($_user[$field_uid] > $cfg['max_uid'] || $user[$field_uid] < $cfg['min_uid']) {
+    if ($user[$field_uid] > $cfg['max_uid'] || $user[$field_uid] < $cfg['min_uid']) {
       array_push($errors, 'Invalid UID; UID must be between ' . $cfg['min_uid'] . ' and ' . $cfg['max_uid'] . '.');
     }
   } else if ($cfg['max_uid'] != -1 && $user[$field_uid] > $cfg['max_uid']) {
