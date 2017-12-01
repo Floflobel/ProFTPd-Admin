@@ -169,7 +169,7 @@ if (empty($errormsg)) {
   $uid      = $user[$field_uid];
   $ugid     = $user[$field_ugid];
   $passwd   = '';
-  $homedir  = substr($field_homedir, strlen($cfg['default_homedir']));
+  $homedir  = substr($user[$field_homedir], strlen($cfg['default_homedir']));
   $default_homedir  = 	$cfg['default_homedir'];
   $shell    = $user[$field_shell];
   $title    = $user[$field_title];
