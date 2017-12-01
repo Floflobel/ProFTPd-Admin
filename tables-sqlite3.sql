@@ -5,6 +5,8 @@ CREATE TABLE `groups` (
 );
 CREATE UNIQUE INDEX `groupname` ON groups (`groupname`);
 
+INSERT INTO groups (groupname, gid) VALUES ('default', 30000);
+
 CREATE TABLE `users` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   `userid` VARCHAR(32) UNIQUE NOT NULL default '',
@@ -17,7 +19,6 @@ CREATE TABLE `users` (
   `shell` VARCHAR(32) NOT NULL default '/bin/false',
   `email` VARCHAR(255) NOT NULL default '',
   `name` VARCHAR(255) NOT NULL default '',
-  `title` VARCHAR(5) NOT NULL default '',
   `company` VARCHAR(255) NOT NULL default '',
   `bytes_in_used` UNSIGNED BIGINT(20) NOT NULL default '0',
   `bytes_out_used` UNSIGNED BIGINT(20) NOT NULL default '0',

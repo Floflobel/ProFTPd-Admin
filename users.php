@@ -23,7 +23,6 @@ $field_uid      = $cfg['field_uid'];
 $field_ugid     = $cfg['field_ugid'];
 $field_homedir  = $cfg['field_homedir'];
 $field_shell    = $cfg['field_shell'];
-$field_title    = $cfg['field_title'];
 $field_name     = $cfg['field_name'];
 $field_company  = $cfg['field_company'];
 $field_email    = $cfg['field_email'];

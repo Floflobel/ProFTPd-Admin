@@ -25,7 +25,6 @@ $field_ad_gid   = 'ad_gid';
 $field_passwd   = $cfg['field_passwd'];
 $field_homedir  = $cfg['field_homedir'];
 $field_shell    = $cfg['field_shell'];
-$field_title    = $cfg['field_title'];
 $field_name     = $cfg['field_name'];
 $field_company  = $cfg['field_company'];
 $field_email    = $cfg['field_email'];
@@ -130,7 +129,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
                       $field_passwd   => $_REQUEST[$field_passwd],
                       $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
                       $field_shell    => $user[$field_shell],
-                      $field_title    => $_REQUEST[$field_title],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
                       $field_company  => $_REQUEST[$field_company],
@@ -172,7 +170,6 @@ if (empty($errormsg)) {
   $passwd   = '';
   $homedir  = substr($user[$field_homedir], strlen($cfg['default_homedir']));
   $shell    = $user[$field_shell];
-  $title    = $user[$field_title];
   $name     = $user[$field_name];
   $email    = $user[$field_email];
   $company  = $user[$field_company];
@@ -187,7 +184,6 @@ if (empty($errormsg)) {
   $passwd   = $_REQUEST[$field_passwd];
   $homedir  = $_REQUEST[$field_homedir];
   $shell    = $_REQUEST[$field_shell];
-  $title    = $_REQUEST[$field_title];
   $name     = $_REQUEST[$field_name];
   $email    = $_REQUEST[$field_email];
   $company  = $_REQUEST[$field_company];
@@ -297,16 +293,6 @@ include ("includes/header.php");
             <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $cfg['default_homedir'] ?>)</label>
             <div class="controls col-sm-8">
               <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home directory" />
-            </div>
-          </div>
-          <!-- Title -->
-          <div class="form-group">
-            <label for="<?php echo $field_title; ?>" class="col-sm-4 control-label">Title</label>
-            <div class="col-sm-8">
-              <select class="form-control" id="<?php echo $field_title; ?>" name="<?php echo $field_title; ?>" required>
-                <option value="m" <?php if ($title == 'm') { echo 'selected="selected"'; } ?>>Mr.</option>
-                <option value="f" <?php if ($title == 'f') { echo 'selected="selected"'; } ?>>Ms.</option>
-              </select>
             </div>
           </div>
           <!-- Real name -->

@@ -286,7 +286,6 @@ class AdminClass {
         $field_passwd   = $this->config['field_passwd'];
         $field_homedir  = $this->config['field_homedir'];
         $field_shell    = $this->config['field_shell'];
-        $field_title    = $this->config['field_title'];
         $field_name     = $this->config['field_name'];
         $field_company  = $this->config['field_company'];
         $field_email    = $this->config['field_email'];
@@ -307,7 +306,7 @@ class AdminClass {
         } else {
           $passwd = $passwd_encryption.'("'.$userdata[$field_passwd].'")';
         }
-        $format = 'INSERT INTO %s (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) VALUES ("%s","%s","%s",%s,"%s","%s","%s","%s","%s","%s","%s","%s","%s")';
+        $format = 'INSERT INTO %s (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) VALUES ("%s","%s",%s,"%s","%s","%s","%s","%s","%s","%s","%s","%s")';
         $query = sprintf($format, $this->config['table_users'],
                                   $field_userid,
                                   $field_uid,
@@ -315,7 +314,6 @@ class AdminClass {
                                   $field_passwd,
                                   $field_homedir,
                                   $field_shell,
-                                  $field_title,
                                   $field_name,
                                   $field_company,
                                   $field_email,
@@ -328,7 +326,6 @@ class AdminClass {
                                   $passwd,
                                   $userdata[$field_homedir],
                                   $userdata[$field_shell],
-                                  $userdata[$field_title],
                                   $userdata[$field_name],
                                   $userdata[$field_company],
                                   $userdata[$field_email],
@@ -569,7 +566,6 @@ class AdminClass {
         $field_passwd   = $this->config['field_passwd'];
         $field_homedir  = $this->config['field_homedir'];
         $field_shell    = $this->config['field_shell'];
-        $field_title    = $this->config['field_title'];
         $field_name     = $this->config['field_name'];
         $field_company  = $this->config['field_company'];
         $field_email    = $this->config['field_email'];
@@ -598,7 +594,7 @@ class AdminClass {
           $passwd_query = sprintf($passwd_format, $field_passwd, $passwd);
         }
 
-        $format = 'UPDATE %s SET %s %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s" WHERE %s="%s"';
+        $format = 'UPDATE %s SET %s %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s", %s="%s" WHERE %s="%s"';
         $query = sprintf($format, $this->config['table_users'],
                                   $passwd_query,
                                   $field_userid,   $userdata[$field_userid],
@@ -606,7 +602,6 @@ class AdminClass {
                                   $field_ugid,     $userdata[$field_ugid],
                                   $field_homedir,  $userdata[$field_homedir],
                                   $field_shell,    $userdata[$field_shell],
-                                  $field_title,    $userdata[$field_title],
                                   $field_name,     $userdata[$field_name],
                                   $field_company,  $userdata[$field_company],
                                   $field_email,    $userdata[$field_email],
