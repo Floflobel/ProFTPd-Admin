@@ -124,12 +124,12 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     /* update user */
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_id       => $_REQUEST[$field_id],
-                      $field_userid   => $_REQUEST[$field_userid],
-                      $field_uid      => $_REQUEST[$field_uid],
-                      $field_ugid     => $_REQUEST[$field_ugid],
+                      $field_userid   => $user[$field_userid],
+                      $field_uid      => $user[$field_uid],
+                      $field_ugid     => $user[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
-                      $field_shell    => $_REQUEST[$field_shell],
+                      $field_homedir  => $_REQUEST[$field_homedir],
+                      $field_shell    => $user[$field_shell],
                       $field_title    => $_REQUEST[$field_title],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
