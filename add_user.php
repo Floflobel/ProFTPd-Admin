@@ -124,8 +124,7 @@ if (isset($errormsg)) {
   $ugid     = $cfg['default_gid'];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
-  $homedir  = "toto";
-// $cfg['default_homedir'] . $_REQUEST[$field_homedir];
+  $homedir  = $cfg['default_homedir'];
   $shell    = $cfg['default_shell'];
   $name     = $_REQUEST[$field_name];
   $email    = $_REQUEST[$field_email];
@@ -191,7 +190,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $homedir; ?>)</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="" placeholder="Enter a home folder" />
+                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $homedir; ?>" value="" placeholder="Enter a home folder" />
               </div>
             </div>
             <!-- Real name -->
