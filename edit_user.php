@@ -280,6 +280,17 @@ include ("includes/header.php");
               <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
             </div>
           </div>
+          <!-- Main group -->
+          <div class="form-group">
+            <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
+            <div class="controls col-sm-8">
+              <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
+              <?php reset ($groups); while (list($g_gid, $g_group) = each($groups)) { ?>
+                <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
+              <?php } ?>
+              </select>
+            </div>
+          </div>
           <!-- Password -->
           <div class="form-group">
             <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
