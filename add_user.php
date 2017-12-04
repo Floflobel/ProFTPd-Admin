@@ -66,9 +66,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   if (strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
     array_push($errors, 'Password is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
   }
-  if (strlen($_REQUEST[$field_homedir]) <= 1) {
-    array_push($errors, 'Invalid home directory; home directory cannot be empty.');
-  }
+//  if (strlen($_REQUEST[$field_homedir]) <= 1) {
+//    array_push($errors, 'Invalid home directory; home directory cannot be empty.');
+//  }
   /* shell validation */
   if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
@@ -88,7 +88,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_uid      => $cfg['default_uid'],
                       $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_ugid],
+                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_ugid] . "/" . $_REQUEST[$field_userid],
                       $field_shell    => $cfg['default_shell'],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
@@ -196,7 +196,6 @@ include ("includes/header.php");
                 <p class="help-block"><small>Minimum length <?php echo $cfg['min_passwd_length']; ?> characters.</small></p>
               </div>
             </div>
-            <!-- Home directory -->
             <!-- Real name -->
             <div class="form-group">
               <label for="<?php echo $field_name; ?>" class="col-sm-4 control-label">Name</label>
