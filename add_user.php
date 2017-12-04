@@ -43,7 +43,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   if (empty($_REQUEST[$field_userid])
       || !preg_match($cfg['userid_regex'], $_REQUEST[$field_userid])
       || strlen($_REQUEST[$field_userid]) > $cfg['max_userid_length']) {
-      while(list($g_gid, $g_group) = each($groups)) { $g_gid };
+      while(list($g_gid, $g_group) = each($groups)) { $g_gid }
     array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_userid_length'].' characters.');
   }
   /* uid validation */
