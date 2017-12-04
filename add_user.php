@@ -190,7 +190,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $homedir; ?>)</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $homedir; ?>" value="" placeholder="Enter a home folder" />
+                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="" placeholder="Enter a home folder" />
               </div>
             </div>
             <!-- Real name -->
