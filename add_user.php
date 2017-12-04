@@ -194,7 +194,7 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $homedir; ?>)</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="" placeholder="Enter a home folder" pattern="/^([^\.]|([^\.])\.[^\.])*$/" required />
+                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="" placeholder="Enter a home folder" pattern="[^'\x22]" required />
               </div>
             </div>
             <!-- Real name -->
