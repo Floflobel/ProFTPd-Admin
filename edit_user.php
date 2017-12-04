@@ -158,7 +158,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     /* update additional groups */
     $ad_gid = $ac->parse_groups($userid);
     $infomsg = 'User "'.$_REQUEST[$field_userid].'" updated successfully.';
-    $infomsg = 'debug: "' . $cfg['default_homedir'] . $_REQUEST[$field_homedir] . '" -- ';
+    $infomsg = 'DEBUG: "' . $cfg['default_homedir'] . $_REQUEST[$field_homedir] . '" -- ';
   }
 }
 
