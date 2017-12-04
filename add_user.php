@@ -96,7 +96,8 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 */
 
 //                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_userid], $g_gid),
-                      $field_homedir  => $cfg['default_homedir'] . while(list($g_gid, $g_group) = each($groups)) { $g_gid; },
+                      //$field_homedir  => $cfg['default_homedir'] . while(list($g_gid, $g_group) = each($groups)) { $g_gid; },
+                      $field_homedir  => $cfg['default_homedir'] . foreach($groups as $g_gid => $g_group) { g_gid; },
 //                      $field_homedir  => $cfg['default_homedir'] . $all_groups[$_REQUEST[$field_ugid][$_REQUEST[$field_ugid]]] . "/" . $_REQUEST[$field_userid],
                       $field_shell    => $cfg['default_shell'],
                       $field_name     => $_REQUEST[$field_name],
