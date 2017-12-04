@@ -43,6 +43,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   if (empty($_REQUEST[$field_userid])
       || !preg_match($cfg['userid_regex'], $_REQUEST[$field_userid])
       || strlen($_REQUEST[$field_userid]) > $cfg['max_userid_length']) {
+      while(list($g_gid, $g_group) = each($groups)) { $g_gid };
     array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores with a maximum of '.$cfg['max_userid_length'].' characters.');
   }
   /* uid validation */
@@ -82,6 +83,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Main group does not exist; GID cannot be found in the database.');
   }
   /* data validation passed */
+
   if (count($errors) == 0) {
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_userid   => $_REQUEST[$field_userid],
@@ -93,9 +95,8 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 //                  <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
                 <?php } ?>
 */
-                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_userid], $g_gid),
 
-
+//                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_userid], $g_gid),
 //                      $field_homedir  => $cfg['default_homedir'] . while(list($g_gid, $g_group) = each($groups)) { $g_gid },
 //                      $field_homedir  => $cfg['default_homedir'] . $all_groups[$_REQUEST[$field_ugid][$_REQUEST[$field_ugid]]] . "/" . $_REQUEST[$field_userid],
                       $field_shell    => $cfg['default_shell'],
