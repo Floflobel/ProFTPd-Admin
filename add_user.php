@@ -93,8 +93,10 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 //                  <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
                 <?php } ?>
 */
-                      $field_homedir  => $cfg['default_homedir'] . while(list($g_gid, $g_group) = each($groups)) { $g_gid },
+                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_userid], $g_gid),
 
+
+//                      $field_homedir  => $cfg['default_homedir'] . while(list($g_gid, $g_group) = each($groups)) { $g_gid },
 //                      $field_homedir  => $cfg['default_homedir'] . $all_groups[$_REQUEST[$field_ugid][$_REQUEST[$field_ugid]]] . "/" . $_REQUEST[$field_userid],
                       $field_shell    => $cfg['default_shell'],
                       $field_name     => $_REQUEST[$field_name],
