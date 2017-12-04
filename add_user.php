@@ -89,8 +89,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_uid      => $cfg['default_uid'],
                       $field_ugid     => $cfg['default_gid'],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => "toto",
-//$cfg['default_homedir'] . $_REQUEST[$field_homedir],
+                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
                       $field_shell    => $cfg['default_shell'],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
@@ -108,7 +107,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
           $ac->add_user_to_group($_REQUEST[$field_userid], $g_gid);
         }
       }
-      $infomsg = 'User "'.$_REQUEST[$field_userid].'" created successfully. With data dir "'.$REQUEST[$field_homedir].'" create';
+      $infomsg = 'User "'.$_REQUEST[$field_userid].'" created successfully. DEBUG: With data dir "'.$_REQUEST[$field_homedir].'" create';
     } else {
       $errormsg = 'User "'.$_REQUEST[$field_userid].'" creation failed; check log files.';
     }
