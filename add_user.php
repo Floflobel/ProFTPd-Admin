@@ -108,7 +108,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
           $ac->add_user_to_group($_REQUEST[$field_userid], $g_gid);
         }
       }
-      $infomsg = 'User "'.$_REQUEST[$field_userid].'" created successfully.';
+      $infomsg = 'User "'.$_REQUEST[$field_userid].'" created successfully. With data dir "'.$REQUEST[$field_homedir].'" create';
     } else {
       $errormsg = 'User "'.$_REQUEST[$field_userid].'" creation failed; check log files.';
     }
