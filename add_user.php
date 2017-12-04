@@ -59,7 +59,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* gid validation */
-  if (empty($cfg['default_gid']) || !$ac->is_valid_id($cfg['default_gid'])) {
+  if (empty($_REQUEST[$field_ugid]) || !$ac->is_valid_id($_REQUEST[$field_ugid])) {
     array_push($errors, 'Invalid main group; GID must be a positive integer.');
   }
   /* password length validation */
@@ -78,7 +78,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'User name already exists; name must be unique.');
   }
   /* gid existance validation */
-  if (!$ac->check_gid($cfg['default_gid'])) {
+  if (!$ac->check_gid($_REQUEST[$field_ugid])) {
     array_push($errors, 'Main group does not exist; GID cannot be found in the database.');
   }
   /* data validation passed */
@@ -86,7 +86,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_userid   => $_REQUEST[$field_userid],
                       $field_uid      => $cfg['default_uid'],
-                      $field_ugid     => $cfg['default_gid'],
+                      $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
                       $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
                       $field_shell    => $cfg['default_shell'],
@@ -120,7 +120,7 @@ if (isset($errormsg)) {
   /* This is a failed attempt */
   $userid   = $_REQUEST[$field_userid];
   $uid      = $cfg['default_uid'];
-  $ugid     = $cfg['default_gid'];
+  $ugid     = $_REQUEST[$field_ugid];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
   $homedir  = $cfg['default_homedir'];
@@ -175,6 +175,17 @@ include ("includes/header.php");
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" placeholder="Enter a user name" maxlength="<?php echo $cfg['max_userid_length']; ?>" pattern="<?php echo substr($cfg['userid_regex'], 2, -3); ?>" required />
                 <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
+              </div>
+            </div>
+            <!-- Main group -->
+            <div class="form-group">
+              <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
+              <div class="controls col-sm-8">
+                <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
+                <?php while (list($g_gid, $g_group) = each($groups)) { ?>
+                  <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
+                <?php } ?>
+                </select>
               </div>
             </div>
             <!-- Password -->
