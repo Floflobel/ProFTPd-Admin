@@ -64,7 +64,7 @@ $cfg['homedir_regex']    = "/^([^\.]|([^\.])\.[^\.]{0,".($cfg['max_groupname_len
 $cfg['min_uid'] = 30000;
 $cfg['max_uid'] = 30000;
 $cfg['min_gid'] = 30000;
-$cfg['max_gid'] = 30000;
+$cfg['max_gid'] = 30002;
 // Uncomment this to read crypt() settings from login.defs.
 // $cfg['read_login_defs'] = true;
 
