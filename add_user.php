@@ -66,14 +66,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   if (strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
     array_push($errors, 'Password is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
   }
-  /* home directory validation */
-//  if (empty($_REQUEST[$field_homedir])
-//      || !preg_match($cfg['homedir_regex'], $_REQUEST[$field_homedir])) {
-//    array_push($errors, 'Invalid user name; user name must contain only letters, numbers, hyphens, and underscores.');
-//  }
-  //if (strlen($_REQUEST[$field_homedir]) <= 1) {
-  //  array_push($errors, 'Invalid home directory; home directory cannot be empty.');
-  //}
+  if (strlen($_REQUEST[$field_homedir]) <= 1) {
+    array_push($errors, 'Invalid home directory; home directory cannot be empty.');
+  }
   /* shell validation */
   if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
