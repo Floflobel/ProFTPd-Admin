@@ -86,16 +86,12 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* gid validation */
-  if (empty($user[$field_ugid]) || !$ac->is_valid_id($user[$field_ugid])) {
+  if (empty($_REQUEST[$field_ugid]) || !$ac->is_valid_id($_REQUEST[$field_ugid])) {
     array_push($errors, 'Invalid main group; GID must be a positive integer.');
   }
   /* password length validation */
   if (strlen($_REQUEST[$field_passwd]) > 0 && strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
     array_push($errors, 'Password is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
-  }
-  /* home directory validation */
-  if (strlen($_REQUEST[$field_homedir]) <= 1) {
-    array_push($errors, 'Invalid home directory; home directory cannot be empty.');
   }
   /* shell validation */
   if (strlen($user[$field_shell]) <= 1) {
@@ -106,8 +102,8 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     array_push($errors, 'User name already exists; name must be unique.');
   }
   /* gid existance validation */
-  if (!$ac->check_gid($user[$field_ugid])) {
-    array_push($errors, 'Main group does not exist; GID '.$user[$field_ugid].' cannot be found in the database.');
+  if (!$ac->check_gid($_REQUEST[$field_ugid])) {
+    array_push($errors, 'Main group does not exist; GID '.$_REQUEST[$field_ugid].' cannot be found in the database.');
   }
   /* data validation passed */
   if (count($errors) == 0) {
@@ -117,6 +113,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
         array_push($errors, 'Cannot remove user "'.$userid.'" from group "'.$g_group.'"; see log files for more information.');
         break;
       }
+      if($_REQUEST[$field_ugid] == $g_gid) {
+        $name_group = $g_group;
+      }
     }
   }
   if (count($errors) == 0) {
@@ -125,9 +124,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     $userdata = array($field_id       => $_REQUEST[$field_id],
                       $field_userid   => $user[$field_userid],
                       $field_uid      => $user[$field_uid],
-                      $field_ugid     => $user[$field_ugid],
+                      $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
+                      $field_homedir  => $cfg['default_homedir'] . $name_group . "/" . $_REQUEST[$field_userid],
                       $field_shell    => $user[$field_shell],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
@@ -144,21 +143,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     $errormsg = implode($errors, "<br />\n");
   }
   if (empty($errormsg)) {
-    /* add all groups */
-    if (isset($_REQUEST[$field_ad_gid])) {
-      while (list($g_key, $g_gid) = each($_REQUEST[$field_ad_gid])) {
-        if (!$ac->is_valid_id($g_gid)) {
-            $warnmsg = 'Adding additional group failed; at least one of the additional groups had an invalid GID.';
-          continue;
-        }
-        // XXX: fix error handling here
-        $ac->add_user_to_group($_REQUEST[$field_userid], $g_gid);
-      }
-    }
     /* update additional groups */
-    $ad_gid = $ac->parse_groups($userid);
     $infomsg = 'User "'.$_REQUEST[$field_userid].'" updated successfully.';
-    $infomsg = 'debug: "' . $cfg['default_homedir'] . $_REQUEST[$field_homedir] . '" -- ';
+    $infomsg = 'DEBUG: "' . $cfg['default_homedir'] . $_REQUEST[$field_homedir] . '" -- ';
   }
 }
 
@@ -280,19 +267,23 @@ include ("includes/header.php");
               <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
             </div>
           </div>
+          <!-- Main group -->
+          <div class="form-group">
+            <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
+            <div class="controls col-sm-8">
+              <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
+              <?php reset ($groups); while (list($g_gid, $g_group) = each($groups)) { ?>
+                <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
+              <?php } ?>
+              </select>
+            </div>
+          </div>
           <!-- Password -->
           <div class="form-group">
             <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
             <div class="controls col-sm-8">
               <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" />
               <p class="help-block"><small>Minimum length <?php echo $cfg['min_passwd_length']; ?> characters.</small></p>
-            </div>
-          </div>
-          <!-- Home directory -->
-          <div class="form-group">
-            <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $cfg['default_homedir'] ?>)</label>
-            <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home directory" />
             </div>
           </div>
           <!-- Real name -->

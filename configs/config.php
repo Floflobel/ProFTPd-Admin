@@ -59,11 +59,12 @@ $cfg['max_groupname_length'] = "32";
 // for some reason the PHP validation still needs the i modifier so just leave it in
 $cfg['userid_regex']    = "/^([a-zA-Z][a-zA-Z0-9_\-]{0,".($cfg['max_userid_length']-1)."})$/i"; //every username must comply with this regex
 $cfg['groupname_regex'] = "/^([a-zA-Z][a-zA-Z0-9_\-]{0,".($cfg['max_groupname_length']-1)."})$/i"; //every username must comply with this regex
+$cfg['homedir_regex']    = "/^([^\.]|([^\.])\.[^\.]{0,".($cfg['max_groupname_length']-1)."})*$/"; //every username must comply with this regex
 // Set any of these to -1 to remove the constraint
 $cfg['min_uid'] = 30000;
 $cfg['max_uid'] = 30000;
 $cfg['min_gid'] = 30000;
-$cfg['max_gid'] = 30000;
+$cfg['max_gid'] = 30002;
 // Uncomment this to read crypt() settings from login.defs.
 // $cfg['read_login_defs'] = true;
 

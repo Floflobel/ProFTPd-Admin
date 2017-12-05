@@ -59,17 +59,16 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'Invalid UID; UID must be at least ' . $cfg['min_uid'] . '.');
   }
   /* gid validation */
-  if (empty($cfg['default_gid']) || !$ac->is_valid_id($cfg['default_gid'])) {
+  if (empty($_REQUEST[$field_ugid]) || !$ac->is_valid_id($_REQUEST[$field_ugid])) {
     array_push($errors, 'Invalid main group; GID must be a positive integer.');
   }
   /* password length validation */
   if (strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
     array_push($errors, 'Password is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
   }
-  /* home directory validation */
-  if (strlen($_REQUEST[$field_homedir]) <= 1) {
-    array_push($errors, 'Invalid home directory; home directory cannot be empty.');
-  }
+//  if (strlen($_REQUEST[$field_homedir]) <= 1) {
+//    array_push($errors, 'Invalid home directory; home directory cannot be empty.');
+//  }
   /* shell validation */
   if (strlen($cfg['default_shell']) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
@@ -79,17 +78,22 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     array_push($errors, 'User name already exists; name must be unique.');
   }
   /* gid existance validation */
-  if (!$ac->check_gid($cfg['default_gid'])) {
+  if (!$ac->check_gid($_REQUEST[$field_ugid])) {
     array_push($errors, 'Main group does not exist; GID cannot be found in the database.');
   }
   /* data validation passed */
   if (count($errors) == 0) {
+    while (list($g_gid, $g_group) = each($groups)) { 
+      if($_REQUEST[$field_ugid] == $g_gid) {
+        $name_group = $g_group;
+      }
+    }
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_userid   => $_REQUEST[$field_userid],
                       $field_uid      => $cfg['default_uid'],
-                      $field_ugid     => $cfg['default_gid'],
+                      $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
+                      $field_homedir  => $cfg['default_homedir'] . $name_group . "/" . $_REQUEST[$field_userid],
                       $field_shell    => $cfg['default_shell'],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
@@ -99,10 +103,10 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
     if ($ac->add_user($userdata)) {
       if (isset($_REQUEST[$field_ad_gid])) {
         while (list($g_key, $g_gid) = each($_REQUEST[$field_ad_gid])) {
-          //if (!$ac->is_valid_id($g_gid)) {
-          //  $warnmsg = 'Adding additional group failed; at least one of the additional groups had an invalid GID.';
-          //  continue;
-          //}
+          if (!$ac->is_valid_id($g_gid)) {
+            $warnmsg = 'Adding additional group failed; at least one of the additional groups had an invalid GID.';
+            continue;
+          }
           // XXX: fix error handling here
           $ac->add_user_to_group($_REQUEST[$field_userid], $g_gid);
         }
@@ -121,10 +125,10 @@ if (isset($errormsg)) {
   /* This is a failed attempt */
   $userid   = $_REQUEST[$field_userid];
   $uid      = $cfg['default_uid'];
-  $ugid     = $cfg['default_ugid'];
+  $ugid     = $_REQUEST[$field_ugid];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
-  $homedir  = $cfg['default_homedir'] . $_REQUEST[$field_homedir];
+  $homedir  = $cfg['default_homedir'];
   $shell    = $cfg['default_shell'];
   $name     = $_REQUEST[$field_name];
   $email    = $_REQUEST[$field_email];
@@ -144,7 +148,7 @@ if (isset($errormsg)) {
     $ad_gid = array();
     $shell  = "/bin/false";
   } else {
-    $ugid    = $cfg['default_gid'];
+    $ugid    = $_REQUEST[$field_ugid];
     $ad_gid = $_REQUEST[$field_ad_gid];
     $shell  = $cfg['default_shell'];
   }
@@ -172,53 +176,57 @@ include ("includes/header.php");
           <form role="form" class="form-horizontal" method="post" data-toggle="validator">
             <!-- User name -->
             <div class="form-group">
-              <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">User name</label>
+              <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">User name <font color="red">*</font></label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" placeholder="Enter a user name" maxlength="<?php echo $cfg['max_userid_length']; ?>" pattern="<?php echo substr($cfg['userid_regex'], 2, -3); ?>" required />
+                <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" placeholder="Mandatory user name" maxlength="<?php echo $cfg['max_userid_length']; ?>" pattern="<?php echo substr($cfg['userid_regex'], 2, -3); ?>" required />
                 <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
+              </div>
+            </div>
+            <!-- Main group -->
+            <div class="form-group">
+              <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group <font color="red">*</font></label>
+              <div class="controls col-sm-8">
+                <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
+                <?php while (list($g_gid, $g_group) = each($groups)) { ?>
+                  <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
+                <?php } ?>
+                </select>
               </div>
             </div>
             <!-- Password -->
             <div class="form-group">
-              <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
+              <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password <font color="red">*</font></label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Enter a password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required />
+                <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required />
                 <p class="help-block"><small>Minimum length <?php echo $cfg['min_passwd_length']; ?> characters.</small></p>
-              </div>
-            </div>
-            <!-- Home directory -->
-            <div class="form-group">
-              <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $homedir; ?>)</label>
-              <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="" placeholder="Enter a home folder" />
               </div>
             </div>
             <!-- Real name -->
             <div class="form-group">
               <label for="<?php echo $field_name; ?>" class="col-sm-4 control-label">Name</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="Enter the user's real name" />
+                <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="Optional friendly name" />
               </div>
             </div>
             <!-- Email -->
             <div class="form-group">
               <label for="<?php echo $field_email; ?>" class="col-sm-4 control-label">E-mail</label>
               <div class="controls col-sm-8">
-                <input type="email" class="form-control" id="<?php echo $field_email; ?>" name="<?php echo $field_email; ?>" value="<?php echo $email; ?>" placeholder="Enter the user's email" />
+                <input type="email" class="form-control" id="<?php echo $field_email; ?>" name="<?php echo $field_email; ?>" value="<?php echo $email; ?>" placeholder="Optional email" />
               </div>
             </div>
             <!-- Company -->
             <div class="form-group">
               <label for="<?php echo $field_company; ?>" class="col-sm-4 control-label">Company</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_company; ?>" name="<?php echo $field_company; ?>" value="<?php echo $company; ?>" placeholder="Enter a company or department" />
+                <input type="text" class="form-control" id="<?php echo $field_company; ?>" name="<?php echo $field_company; ?>" value="<?php echo $company; ?>" placeholder="Optional company or department" />
               </div>
             </div>
             <!-- Comment -->
             <div class="form-group">
               <label for="<?php echo $field_comment; ?>" class="col-sm-4 control-label">Comment</label>
               <div class="controls col-sm-8">
-                <textarea class="form-control" id="<?php echo $field_comment; ?>" name="<?php echo $field_comment; ?>" rows="3" placeholder="Enter a comment or additional information about the user"><?php echo $comment; ?></textarea>
+                <textarea class="form-control" id="<?php echo $field_comment; ?>" name="<?php echo $field_comment; ?>" rows="3" placeholder="Optional comment or additional information about this account"><?php echo $comment; ?></textarea>
               </div>
             </div>
             <!-- Suspended -->
