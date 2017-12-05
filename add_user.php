@@ -176,7 +176,7 @@ include ("includes/header.php");
           <form role="form" class="form-horizontal" method="post" data-toggle="validator">
             <!-- User name -->
             <div class="form-group">
-              <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">User name<font color="red">*</font></label>
+              <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">User name <font color="red">*</font></label>
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" placeholder="Mandatory user name" maxlength="<?php echo $cfg['max_userid_length']; ?>" pattern="<?php echo substr($cfg['userid_regex'], 2, -3); ?>" required />
                 <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
@@ -184,7 +184,7 @@ include ("includes/header.php");
             </div>
             <!-- Main group -->
             <div class="form-group">
-              <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group</label>
+              <label for="<?php echo $field_ugid; ?>" class="col-sm-4 control-label">Main group <font color="red">*</font></label>
               <div class="controls col-sm-8">
                 <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
                 <?php while (list($g_gid, $g_group) = each($groups)) { ?>
@@ -195,7 +195,7 @@ include ("includes/header.php");
             </div>
             <!-- Password -->
             <div class="form-group">
-              <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password</label>
+              <label for="<?php echo $field_passwd; ?>" class="col-sm-4 control-label">Password <font color="red">*</font></label>
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Mandatory password" minlength="<?php echo $cfg['min_passwd_length']; ?>" required />
                 <p class="help-block"><small>Minimum length <?php echo $cfg['min_passwd_length']; ?> characters.</small></p>
