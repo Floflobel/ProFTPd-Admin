@@ -93,10 +93,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   if (strlen($_REQUEST[$field_passwd]) > 0 && strlen($_REQUEST[$field_passwd]) < $cfg['min_passwd_length']) {
     array_push($errors, 'Password is too short; minimum length is '.$cfg['min_passwd_length'].' characters.');
   }
-  /* home directory validation */
-  if (strlen($_REQUEST[$field_homedir]) <= 1) {
-    array_push($errors, 'Invalid home directory; home directory cannot be empty.');
-  }
   /* shell validation */
   if (strlen($user[$field_shell]) <= 1) {
     array_push($errors, 'Invalid shell; shell cannot be empty.');
@@ -117,14 +113,12 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
         array_push($errors, 'Cannot remove user "'.$userid.'" from group "'.$g_group.'"; see log files for more information.');
         break;
       }
-    }
-  }
-  if (count($errors) == 0) {
-    while (list($g_gid, $g_group) = each($groups)) {
       if($_REQUEST[$field_ugid] == $g_gid) {
         $name_group = $g_group;
       }
     }
+  }
+  if (count($errors) == 0) {
     /* update user */
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_id       => $_REQUEST[$field_id],
