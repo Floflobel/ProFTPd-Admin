@@ -149,7 +149,7 @@ if (isset($errormsg)) {
     $ad_gid = array();
     $shell  = "/bin/false";
   } else {
-    $ugid    = $_REQUEST[$field_ugid];;
+    $ugid   = $_REQUEST[$field_ugid];
     $ad_gid = $_REQUEST[$field_ad_gid];
     $shell  = $cfg['default_shell'];
   }
