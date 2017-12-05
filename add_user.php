@@ -112,7 +112,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
           $ac->add_user_to_group($_REQUEST[$field_userid], $g_gid);
         }
       }
-      $infomsg = 'User "'.$_REQUEST[$field_userid].'" created successfully."';
+      $infomsg = 'User "'.$_REQUEST[$field_userid].'" created successfully.';
     } else {
       $errormsg = 'User "'.$_REQUEST[$field_userid].'" creation failed; check log files.';
     }
@@ -149,7 +149,7 @@ if (isset($errormsg)) {
     $ad_gid = array();
     $shell  = "/bin/false";
   } else {
-    $ugid    = $cfg['default_gid'];
+    $ugid    = $_REQUEST[$field_ugid];;
     $ad_gid = $_REQUEST[$field_ad_gid];
     $shell  = $cfg['default_shell'];
   }
