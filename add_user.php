@@ -130,8 +130,7 @@ if (isset($errormsg)) {
   $passwd   = $_REQUEST[$field_passwd];
   $homedir  = $cfg['default_homedir'];
   $shell    = $cfg['default_shell'];
-  $name     = "toto";
-  //$name     = $_REQUEST[$field_name];
+  $name     = $_REQUEST[$field_name];
   $email    = $_REQUEST[$field_email];
   $company  = $_REQUEST[$field_company];
   $comment  = $_REQUEST[$field_comment];
@@ -155,7 +154,7 @@ if (isset($errormsg)) {
   }
   $passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);
   $homedir  = $cfg['default_homedir'];
-  $name     = "";
+  $name     = "toto";
   $email    = "";
   $company  = "";
   $comment  = "";
