@@ -144,19 +144,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     $errormsg = implode($errors, "<br />\n");
   }
   if (empty($errormsg)) {
-    /* add all groups */
-    if (isset($_REQUEST[$field_ad_gid])) {
-      while (list($g_key, $g_gid) = each($_REQUEST[$field_ad_gid])) {
-        if (!$ac->is_valid_id($g_gid)) {
-            $warnmsg = 'Adding additional group failed; at least one of the additional groups had an invalid GID.';
-          continue;
-        }
-        // XXX: fix error handling here
-        $ac->add_user_to_group($_REQUEST[$field_userid], $g_gid);
-      }
-    }
     /* update additional groups */
-    $ad_gid = $ac->parse_groups($userid);
     $infomsg = 'User "'.$_REQUEST[$field_userid].'" updated successfully.';
     $infomsg = 'DEBUG: "' . $cfg['default_homedir'] . $_REQUEST[$field_homedir] . '" -- ';
   }
@@ -297,13 +285,6 @@ include ("includes/header.php");
             <div class="controls col-sm-8">
               <input type="text" class="form-control" id="<?php echo $field_passwd; ?>" name="<?php echo $field_passwd; ?>" value="<?php echo $passwd; ?>" placeholder="Change password" />
               <p class="help-block"><small>Minimum length <?php echo $cfg['min_passwd_length']; ?> characters.</small></p>
-            </div>
-          </div>
-          <!-- Home directory -->
-          <div class="form-group">
-            <label for="<?php echo $field_homedir; ?>" class="col-sm-4 control-label">Home directory (<?php echo $cfg['default_homedir'] ?>)</label>
-            <div class="controls col-sm-8">
-              <input type="text" class="form-control" id="<?php echo $field_homedir; ?>" name="<?php echo $field_homedir; ?>" value="<?php echo $homedir; ?>" placeholder="Enter a home directory" />
             </div>
           </div>
           <!-- Real name -->
