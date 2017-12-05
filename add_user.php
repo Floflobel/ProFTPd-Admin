@@ -84,7 +84,9 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
   /* data validation passed */
 
   if (count($errors) == 0) {
-    $toto = foreach($groups as $g_gid => $g_group) { g_gid; };
+
+    while (list($g_gid, $g_group) = each($groups)) { $toto = $g_group; }
+
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_userid   => $_REQUEST[$field_userid],
                       $field_uid      => $cfg['default_uid'],
