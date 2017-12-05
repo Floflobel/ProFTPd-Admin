@@ -131,7 +131,7 @@ if (isset($errormsg)) {
   $homedir  = $cfg['default_homedir'];
   $shell    = $cfg['default_shell'];
   $name     = "toto";
-  $name     = $_REQUEST[$field_name];
+  //$name     = $_REQUEST[$field_name];
   $email    = $_REQUEST[$field_email];
   $company  = $_REQUEST[$field_company];
   $comment  = $_REQUEST[$field_comment];
