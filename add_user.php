@@ -189,7 +189,7 @@ include ("includes/header.php");
               <div class="controls col-sm-8">
                 <select class="form-control multiselect" id="<?php echo $field_ugid; ?>" name="<?php echo $field_ugid; ?>" required>
                 <?php while (list($g_gid, $g_group) = each($groups)) { ?>
-                  <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; echo $g_gid; ?></option>
+                  <option value="<?php echo $g_gid; ?>" <?php if ($ugid == $g_gid) { echo 'selected="selected"'; } ?>><?php echo $g_group; ?></option>
                 <?php } ?>
                 </select>
               </div>
