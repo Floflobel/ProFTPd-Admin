@@ -120,6 +120,11 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
     }
   }
   if (count($errors) == 0) {
+    while (list($g_gid, $g_group) = each($groups)) {
+      if($_REQUEST[$field_ugid] == $g_gid) {
+        $name_group = $g_group;
+      }
+    }
     /* update user */
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_id       => $_REQUEST[$field_id],
@@ -127,7 +132,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
                       $field_uid      => $user[$field_uid],
                       $field_ugid     => $_REQUEST[$field_ugid],
                       $field_passwd   => $_REQUEST[$field_passwd],
-                      $field_homedir  => $cfg['default_homedir'] . $_REQUEST[$field_homedir],
+                      $field_homedir  => $cfg['default_homedir'] . $name_group . "/" . $_REQUEST[$field_userid],
                       $field_shell    => $user[$field_shell],
                       $field_name     => $_REQUEST[$field_name],
                       $field_email    => $_REQUEST[$field_email],
