@@ -19,7 +19,7 @@ $ac = new AdminClass($cfg);
 
 $field_userid   = $cfg['field_userid'];
 $field_uid      = $cfg['field_uid'];
-$field_ugid     = "30000"; //$cfg['field_ugid'];
+$field_ugid     = $cfg['field_ugid'];
 $field_ad_gid   = 'ad_gid';
 $field_passwd   = $cfg['field_passwd'];
 $field_homedir  = $cfg['field_homedir'];
@@ -144,7 +144,8 @@ if (isset($errormsg)) {
     $uid    = $cfg['default_uid'];
   }
   if (empty($infomsg)) {
-    $ugid   = "";
+    $ugid    = $_REQUEST[$field_ugid];
+    //$ugid   = "";
     $ad_gid = array();
     $shell  = "/bin/false";
   } else {
@@ -154,7 +155,7 @@ if (isset($errormsg)) {
   }
   $passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);
   $homedir  = $cfg['default_homedir'];
-  $name     = "toto";
+  $name     = "";
   $email    = "";
   $company  = "";
   $comment  = "";
