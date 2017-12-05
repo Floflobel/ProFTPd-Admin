@@ -144,7 +144,7 @@ if (isset($errormsg)) {
     $uid    = $cfg['default_uid'];
   }
   if (empty($infomsg)) {
-    $ugid   = "";
+    $ugid   = "30000";
     $ad_gid = array();
     $shell  = "/bin/false";
   } else {
