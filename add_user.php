@@ -176,7 +176,7 @@ include ("includes/header.php");
           <form role="form" class="form-horizontal" method="post" data-toggle="validator">
             <!-- User name -->
             <div class="form-group">
-              <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">User name <style color:red;>*</style></label>
+              <label for="<?php echo $field_userid; ?>" class="col-sm-4 control-label">User name <style="color:red;">Hello World</style></label>
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $field_userid; ?>" name="<?php echo $field_userid; ?>" value="<?php echo $userid; ?>" placeholder="Mandatory user name" maxlength="<?php echo $cfg['max_userid_length']; ?>" pattern="<?php echo substr($cfg['userid_regex'], 2, -3); ?>" required />
                 <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_userid_length']; ?> characters.</small></p>
