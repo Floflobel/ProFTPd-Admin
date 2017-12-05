@@ -148,7 +148,7 @@ if (isset($errormsg)) {
     $ad_gid = array();
     $shell  = "/bin/false";
   } else {
-    $ugid   = $_REQUEST[$field_ugid];
+    $ugid    = $_REQUEST[$field_ugid];
     $ad_gid = $_REQUEST[$field_ad_gid];
     $shell  = $cfg['default_shell'];
   }
@@ -205,28 +205,28 @@ include ("includes/header.php");
             <div class="form-group">
               <label for="<?php echo $field_name; ?>" class="col-sm-4 control-label">Name</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="Enter the user's real name" />
+                <input type="text" class="form-control" id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" value="<?php echo $name; ?>" placeholder="Optional friendly name" />
               </div>
             </div>
             <!-- Email -->
             <div class="form-group">
               <label for="<?php echo $field_email; ?>" class="col-sm-4 control-label">E-mail</label>
               <div class="controls col-sm-8">
-                <input type="email" class="form-control" id="<?php echo $field_email; ?>" name="<?php echo $field_email; ?>" value="<?php echo $email; ?>" placeholder="Enter the user's email" />
+                <input type="email" class="form-control" id="<?php echo $field_email; ?>" name="<?php echo $field_email; ?>" value="<?php echo $email; ?>" placeholder="Optional email" />
               </div>
             </div>
             <!-- Company -->
             <div class="form-group">
               <label for="<?php echo $field_company; ?>" class="col-sm-4 control-label">Company</label>
               <div class="controls col-sm-8">
-                <input type="text" class="form-control" id="<?php echo $field_company; ?>" name="<?php echo $field_company; ?>" value="<?php echo $company; ?>" placeholder="Enter a company or department" />
+                <input type="text" class="form-control" id="<?php echo $field_company; ?>" name="<?php echo $field_company; ?>" value="<?php echo $company; ?>" placeholder="Optional company or department" />
               </div>
             </div>
             <!-- Comment -->
             <div class="form-group">
               <label for="<?php echo $field_comment; ?>" class="col-sm-4 control-label">Comment</label>
               <div class="controls col-sm-8">
-                <textarea class="form-control" id="<?php echo $field_comment; ?>" name="<?php echo $field_comment; ?>" rows="3" placeholder="Enter a comment or additional information about the user"><?php echo $comment; ?></textarea>
+                <textarea class="form-control" id="<?php echo $field_comment; ?>" name="<?php echo $field_comment; ?>" rows="3" placeholder="Optional comment or additional information about this account"><?php echo $comment; ?></textarea>
               </div>
             </div>
             <!-- Suspended -->
