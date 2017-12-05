@@ -85,7 +85,11 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 
   if (count($errors) == 0) {
 
-    while (list($g_gid, $g_group) = each($groups)) { $toto = $g_group; }
+    while (list($g_gid, $g_group) = each($groups)) { 
+      if($ugid == $g_gid) {
+        $toto = $g_group;
+      }
+    }
 
     $disabled = isset($_REQUEST[$field_disabled]) ? '1':'0';
     $userdata = array($field_userid   => $_REQUEST[$field_userid],
