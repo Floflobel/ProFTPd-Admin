@@ -146,7 +146,7 @@ if (isset($errormsg)) {
   $passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);
   $homedir  = $cfg['default_homedir'];
   $name     = "";
-  $email    = "toto";
+  $email    = "";
   $company  = "";
   $comment  = "";
   $disabled = '0';
