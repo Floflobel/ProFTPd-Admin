@@ -102,16 +102,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
                       $field_comment  => $_REQUEST[$field_comment],
                       $field_disabled => $disabled);
     if ($ac->add_user($userdata)) {
-      if (isset($_REQUEST[$field_ad_gid])) {
-        while (list($g_key, $g_gid) = each($_REQUEST[$field_ad_gid])) {
-          //if (!$ac->is_valid_id($g_gid)) {
-          //  $warnmsg = 'Adding additional group failed; at least one of the additional groups had an invalid GID.';
-          //  continue;
-          //}
-          // XXX: fix error handling here
-          $ac->add_user_to_group($_REQUEST[$field_userid], $g_gid);
-        }
-      }
       $infomsg = 'User "'.$_REQUEST[$field_userid].'" created successfully.';
     } else {
       $errormsg = 'User "'.$_REQUEST[$field_userid].'" creation failed; check log files.';
@@ -156,7 +146,7 @@ if (isset($errormsg)) {
   $passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);
   $homedir  = $cfg['default_homedir'];
   $name     = "";
-  $email    = "";
+  $email    = "toto";
   $company  = "";
   $comment  = "";
   $disabled = '0';
