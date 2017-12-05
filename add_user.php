@@ -87,7 +87,7 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "c
 
     while (list($g_gid, $g_group) = each($groups)) { 
       if($_REQUEST[$field_ugid] == $g_gid) {
-        $toto = $g_group;
+        $toto => $g_group;
       }
     }
 
