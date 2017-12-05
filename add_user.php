@@ -121,7 +121,7 @@ if (isset($errormsg)) {
   /* This is a failed attempt */
   $userid   = $_REQUEST[$field_userid];
   $uid      = $cfg['default_uid'];
-  $ugid     = $_REQUEST[$field_ugid];
+  $ugid     = $cfg['default_ugid'];
   $ad_gid   = $_REQUEST[$field_ad_gid];
   $passwd   = $_REQUEST[$field_passwd];
   $homedir  = $cfg['default_homedir'] . $_REQUEST[$field_homedir];
