@@ -144,8 +144,7 @@ if (isset($errormsg)) {
     $uid    = $cfg['default_uid'];
   }
   if (empty($infomsg)) {
-    $ugid    = $_REQUEST[$field_ugid];
-    //$ugid   = "";
+    $ugid   = "";
     $ad_gid = array();
     $shell  = "/bin/false";
   } else {
