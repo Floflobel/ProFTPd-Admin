@@ -155,7 +155,6 @@ include ("includes/header.php");
           <div class="form-group">
             <div class="col-sm-12">
               <input type="hidden" name="<?php echo $field_gid; ?>" value="<?php echo $gid; ?>" />
-              <a class="btn btn-danger" href="remove_group.php?action=remove&<?php echo $field_gid; ?>=<?php echo $gid; ?>">Remove group</a>
               <button type="submit" class="btn btn-primary pull-right" role="group" name="action" value="update">Update group</button>
             </div>
           </div>
