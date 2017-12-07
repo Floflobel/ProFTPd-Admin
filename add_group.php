@@ -34,26 +34,11 @@ if (!empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
     array_push($errors, 'Name already exists; name must be unique.');
   }
   /* gid validation */
-  if (empty($_REQUEST[$field_gid]) || !$ac->is_valid_id($_REQUEST[$field_gid])) {
-    array_push($errors, 'Invalid GID; GID must be a positive integer.');
-  }
-  if ($cfg['max_gid'] != -1 && $cfg['min_gid'] != -1) {
-    if ($_REQUEST[$field_gid] > $cfg['max_gid'] || $_REQUEST[$field_gid] < $cfg['min_gid']) {
-      array_push($errors, 'Invalid GID; GID must be between ' . $cfg['min_gid'] . ' and ' . $cfg['max_gid'] . '.');
-    }
-  }  else if ($cfg['max_gid'] != -1 && $_REQUEST[$field_gid] > $cfg['max_gid']) {
-    array_push($errors, 'Invalid GID; GID must be at most ' . $cfg['max_gid'] . '.');
-  }  else if ($cfg['min_gid'] != -1 && $_REQUEST[$field_gid] < $cfg['min_gid']) {
-    array_push($errors, 'Invalid GID; GID must be at least ' . $cfg['min_gid'] . '.');
-  }
-  /* gid uniqueness validation */
-  if ($ac->check_gid($_REQUEST[$field_gid])) {
-    array_push($errors, 'GID already exists; GID must be unique.');
-  }
   /* data validation passed */
   if (count($errors) == 0) {
     $groupdata = array($field_groupname => $_REQUEST[$field_groupname],
-                       $field_gid       => $_REQUEST[$field_gid],
+                       //$field_gid       => $_REQUEST[$field_gid],
+                       $field_gid       => $ac->get_last_ugid() + 1,
                        $field_members   => '');
     if ($ac->add_group($groupdata)) {
         $infomsg = 'Group "'.$_REQUEST[$cfg['field_groupname']].'" created successfully.';
@@ -91,8 +76,6 @@ include ("includes/header.php");
               <label for="<?php echo $cfg['field_gid']; ?>" class="col-sm-4 control-label">GID</label>
               <div class="col-sm-8">
                 <input type="number" class="form-control" id="<?php echo $field_gid; ?>" name="<?php echo $field_gid; ?>" placeholder="Enter the GID" min="1" required>
-                <?php $ugid    = $ac->get_last_ugid() + 1; ?>
-                <?php print_r($ugid); ?>
                 <p class="help-block"><small>Positive integer.</small></p>
               </div>
             </div>
