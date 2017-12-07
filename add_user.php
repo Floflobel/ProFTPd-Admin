@@ -149,7 +149,7 @@ if (isset($errormsg)) {
     $shell  = "/bin/false";
   } else {
     $ugid    = $_REQUEST[$field_ugid];
-    $ad_gid = $_REQUEST[$field_ad_gid];
+    $ad_gid = @$_REQUEST[$field_ad_gid];
     $shell  = $cfg['default_shell'];
   }
   $passwd   = $ac->generate_random_string((int) $cfg['default_passwd_length']);
