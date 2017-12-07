@@ -9,7 +9,6 @@ CREATE TABLE `groups` (
   PRIMARY KEY  (`gid`),
   UNIQUE KEY `groupname` (`groupname`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT='ProFTPd group table';
-INSERT INTO groups (groupname, gid) VALUES ('default', 30000);
 
 #
 # Table structure for table `users`
