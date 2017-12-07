@@ -61,7 +61,6 @@ include ("includes/header.php");
                 <th>Group</th>
                 <th class="hidden-sm hidden-md hidden-lg">Users</th>
                 <th class="hidden-xs">Main users</th>
-                <th class="hidden-xs">Additional users</th>
                 <th data-defaultsort="disabled"></th>
               </thead>
               <tbody>
@@ -73,7 +72,6 @@ include ("includes/header.php");
                     <td class="pull-middle"><a href="edit_group.php?action=show&<?php echo $cfg['field_gid']; ?>=<?php echo $g_gid; ?>"><?php echo $g_group; ?></a></td>
                     <td class="pull-middle hidden-sm hidden-md hidden-lg"><?php echo ($n_main + $n_add); ?></td>
                     <td class="pull-middle hidden-xs"><?php echo $n_main; ?></td>
-                    <td class="pull-middle hidden-xs"><?php echo $n_add; ?></td>
                     <td class="pull-middle">
                       <div class="btn-toolbar pull-right" role="toolbar">
                         <a class="btn-group" role="group" href="edit_group.php?action=show&<?php echo $cfg['field_gid']; ?>=<?php echo $g_gid; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
