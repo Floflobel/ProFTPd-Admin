@@ -24,7 +24,7 @@ $errors          = array();
 
 print_r($ac->get_last_ugid());
 
-if($ac->get_last_ugid() == 1) {
+if($ac->get_last_ugid() == NULL) {
   $gid = $cfg['default_gid'];
 } else {
   $gid = $ac->get_last_ugid() + 1;
