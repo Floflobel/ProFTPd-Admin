@@ -22,7 +22,7 @@ $field_groupname = $cfg['field_groupname'];
 $field_members   = $cfg['field_members'];
 $errors          = array();
 
-print_r($ac->get_last_ugid());
+//print_r($ac->get_last_ugid());
 
 if($ac->get_last_ugid() == 1) {
   $gid = $cfg['default_gid'];
