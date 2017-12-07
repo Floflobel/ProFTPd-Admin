@@ -27,7 +27,7 @@ print_r($ac->get_last_ugid());
 if($ac->get_last_ugid() == 1) {
   $gid = $cfg['default_gid'];
 } else {
-  $gid = $ac->get_last_ugid() + 1
+  $gid = $ac->get_last_ugid() + 1;
 }
 
 if (!empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
