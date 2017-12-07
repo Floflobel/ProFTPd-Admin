@@ -188,6 +188,13 @@ class AdminClass {
         return $result;
     }
 
+    function get_last_ugid() {
+        $format = 'SELECT MAX(%s) FROM %s';
+        $query = sprintf($format, $this->config['field_ugid'], $this->config['table_groups']);
+        $result = $this->dbConn->get_var($query);
+        return $result;
+    }
+
     /**
      * Checks if the given groupname is already in the database
      * @param String $groupname
