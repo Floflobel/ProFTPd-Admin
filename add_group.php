@@ -39,10 +39,6 @@ if (!empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   if ($ac->check_groupname($_REQUEST[$field_groupname])) {
     array_push($errors, 'Name already exists; name must be unique.');
   }
-  /* gid uniqueness validation */
-  if ($ac->check_gid($_REQUEST[$field_gid])) {
-    array_push($errors, 'GID already exists; GID must be unique.');
-  }
   /* data validation passed */
   if (count($errors) == 0) {
     $groupdata = array($field_groupname => $_REQUEST[$field_groupname],
