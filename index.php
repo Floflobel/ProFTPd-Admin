@@ -34,12 +34,6 @@ include ("includes/header.php");
         <div class="col-xs-4 col-sm-5 col-md-6">
           <p><span class="form-control"><?php echo $ac->get_group_count(); ?></span></p>
         </div>
-        <div class="col-xs-8 col-sm-7 col-md-6">
-          <p>Empty groups in database:</p>
-        </div>
-        <div class="col-xs-4 col-sm-5 col-md-6">
-          <p><span class="form-control"><?php echo $ac->get_group_count(true); ?></span></p>
-        </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
           <p><a class="btn btn-primary pull-right" href="groups.php" role="button">View groups &raquo;</a></p>
         </div>
