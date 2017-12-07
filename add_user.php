@@ -32,6 +32,8 @@ $field_disabled = $cfg['field_disabled'];
 
 $groups = $ac->get_groups();
 
+print_r($groups);
+
 if (count($groups) == 0) {
   $errormsg = 'There are no groups in the database; please create at least one group before creating users.';
 }
