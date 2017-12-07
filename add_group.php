@@ -22,15 +22,11 @@ $field_groupname = $cfg['field_groupname'];
 $field_members   = $cfg['field_members'];
 $errors          = array();
 
-print_r($ac->get_last_ugid());
-
 if($ac->get_last_ugid() == NULL) {
   $gid = $cfg['default_gid'];
 } else {
   $gid = $ac->get_last_ugid() + 1;
 }
-
-print_r($gid);
 
 if (!empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   /* group name validation */
@@ -82,14 +78,6 @@ include ("includes/header.php");
               <div class="controls col-sm-8">
                 <input type="text" class="form-control" id="<?php echo $cfg['field_groupname']; ?>" name="<?php echo $cfg['field_groupname']; ?>" placeholder="Enter a group name" maxlength="<?php echo $cfg['max_groupname_length']; ?>" pattern="<?php echo substr($cfg['groupname_regex'], 2, -3); ?>" required>
                 <p class="help-block"><small>Only letters, numbers, hyphens, and underscores. Maximum <?php echo $cfg['max_groupname_length']; ?> characters.</small></p>
-              </div>
-            </div>
-            <!-- GID -->
-            <div class="form-group">
-              <label for="<?php echo $cfg['field_gid']; ?>" class="col-sm-4 control-label">GID</label>
-              <div class="col-sm-8">
-                <input type="number" class="form-control" id="<?php echo $field_gid; ?>" name="<?php echo $field_gid; ?>" placeholder="Enter the GID" min="1" required>
-                <p class="help-block"><small>Positive integer.</small></p>
               </div>
             </div>
             <!-- Actions -->
