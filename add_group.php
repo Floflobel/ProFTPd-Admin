@@ -30,6 +30,8 @@ if($ac->get_last_ugid() == 1) {
   $gid = $ac->get_last_ugid() + 1;
 }
 
+print_r($gid);
+
 if (!empty($_REQUEST["action"]) && $_REQUEST["action"] == "create") {
   /* group name validation */
   if (empty($_REQUEST[$field_groupname])
