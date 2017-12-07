@@ -145,7 +145,6 @@ if (empty($errormsg) && !empty($_REQUEST["action"]) && $_REQUEST["action"] == "u
   if (empty($errormsg)) {
     /* update additional groups */
     $infomsg = 'User "'.$_REQUEST[$field_userid].'" updated successfully.';
-    $infomsg = 'DEBUG: "' . $cfg['default_homedir'] . $_REQUEST[$field_homedir] . '" -- ';
   }
 }
 

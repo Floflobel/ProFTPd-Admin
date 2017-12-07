@@ -180,14 +180,6 @@ include ("includes/header.php");
               <input type="text" class="form-control" id="<?php echo $cfg['field_groupname']; ?>" name="<?php echo $cfg['field_groupname']; ?>" value="<?php echo $groupname; ?>" readonly />
             </div>
           </div>
-          <!-- GID -->
-          <div class="form-group">
-            <label for="<?php echo $cfg['field_gid']; ?>" class="col-sm-4 control-label">New GID</label>
-            <div class="col-sm-8">
-              <input type="number" class="form-control" id="new_<?php echo $cfg['field_gid']; ?>" name="new_<?php echo $cfg['field_gid']; ?>" value="<?php echo $gid; ?>" placeholder="Enter the new GID" min="1" required />
-              <p class="help-block"><small>Positive integer.</small></p>
-            </div>
-          </div>
           <!-- Actions -->
           <div class="form-group">
             <div class="col-sm-12">
