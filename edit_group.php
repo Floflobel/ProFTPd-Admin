@@ -129,35 +129,6 @@ include ("includes/header.php");
           </table>
         <?php } ?>
         <!-- Additional users table -->
-        <h4>Additional users</h4>
-        <?php if (!$users_add) { ?>
-          <p>Currently there are no users with this group in their additional groups.</p>
-        <?php } else { ?>
-          <table class="table table-striped table-condensed sortable">
-            <thead>
-              <th>UID</th>
-              <th><span class="glyphicon glyphicon-user" aria-hidden="true" title="User"></th>
-              <th><span class="glyphicon glyphicon-lock" aria-hidden="true" title="Suspended"></th>
-              <th data-defaultsort="disabled"></th>
-            </thead>
-            <tbody>
-              <?php reset($users_add); while (list($u_id, $u_userid) = each($users_add)) {
-                $user = $ac->get_user_by_id($u_id); ?>
-                <tr>
-                  <td class="pull-middle"><?php echo $user[$field_uid]; ?></td>
-                  <td class="pull-middle"><?php echo $u_userid; ?></td>
-                  <td class="pull-middle"><?php echo ($user[$field_disabled] ? 'Yes' : 'No'); ?></td>
-                  <td class="pull-middle">
-                    <div class="btn-toolbar pull-right" role="toolbar">
-                      <a class="btn-group" role="group" href="edit_user.php?action=show&<?php echo $field_id; ?>=<?php echo $u_id; ?>"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-                      <a class="btn-group" role="group" href="remove_user.php?action=remove&<?php echo $field_id; ?>=<?php echo $u_id; ?>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-                    </div>
-                  </td>
-                </tr>
-              <?php } ?>
-            </tbody>
-          </table>
-        <?php } ?>
       </div>
     </div>
   </div>
