@@ -91,7 +91,7 @@ include ("includes/header.php");
               <label for="<?php echo $cfg['field_gid']; ?>" class="col-sm-4 control-label">GID</label>
               <div class="col-sm-8">
                 <input type="number" class="form-control" id="<?php echo $field_gid; ?>" name="<?php echo $field_gid; ?>" placeholder="Enter the GID" min="1" required>
-                <?php $ugid    = $ac->get_last_uid() + 1; ?>
+                <?php $ugid    = $ac->get_last_ugid() + 1; ?>
                 <?php print_r($ugid); ?>
                 <p class="help-block"><small>Positive integer.</small></p>
               </div>
